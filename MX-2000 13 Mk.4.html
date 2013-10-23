@@ -93,75 +93,7 @@ opacity:0;
 
 
 
-<script>
-
-
-
-
-function updateClock()
-{
-
-var currentTime = new Date();
-var currentHours = currentTime.getHours();
-var currentMinutes = currentTime.getMinutes();
-var currentSeconds = currentTime.getSeconds();
-
-// Convert the hours component to 12-hour format if needed
-currentHours = ( currentHours > 12 ) ? currentHours - 12 : currentHours;
-
-//Convert an hours component of "0" to "12"
-currentHours = ( currentHours == 0 ) ? 12 : currentHours;
-
-//Pad the minutes and seconds with leading zeros, if required
-currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
-currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
-
-//Creates a string for the display
-var hourTimeString = currentHours;
-var minsTimeString = currentMinutes;
-var secsTimeString = currentSeconds;
-
-//Update the time display
-document.getElementById("hourUnit").firstChild.nodeValue = hourTimeString;
-document.getElementById("minuteUnit").firstChild.nodeValue = minsTimeString;
-document.getElementById("secondUnit").firstChild.nodeValue = secsTimeString;
-
-}
-
-setInterval(updateClock, 1000);
-
-
-var currentTime = new Date();
-var currentHours = currentTime.getHours();
-var currentMinutes = currentTime.getMinutes();
-var currentSeconds = currentTime.getSeconds();
-var handRotation = 0; //the degrees the hand is rotated
-
-function rotateHand()
-{
-  var secondsHand = document.getElementById("secondsHand");
-  
-  secondsHand.setAttribute('transform', 'rotate('+handRotation+', 680.17,249.41)');
-
-  handRotation = currentSeconds*6; //adds 6 degrees to the rotation
-  if (handRotation > 359)
-    {
-      handRotation = 0;
-    }
-
-}
-
-setInterval(rotateHand, 20);
-
-
-
-
-//var secondsHand = document.getElementById("secondsHand");
-//var minutesHand = document.getElementById("minsHand");
-//var hoursHand = document.getElementById("hoursHand");
-
-
-</script>
+<script src="mx-200013-mk4.js"></script>
 
 
 
