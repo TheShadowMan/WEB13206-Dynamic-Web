@@ -9,7 +9,14 @@ var handRotation = 0; //the degrees the hand is rotated
 var secondsHand = document.getElementById("secondsHand");
 var minutesHand = document.getElementById("minsHand");
 var hoursHand = document.getElementById("hoursHand");
+var secondSlider = document.getElementById("secondSlider");
+var minSlider = document.getElementById("minSlider");
+var hourSlider = document.getElementById("hourSlider");
 
+
+
+
+// DIGITAL CLOCK /////
 // Convert the hours component to 12-hour format if needed
 currentHours = ( currentHours > 12 ) ? currentHours - 12 : currentHours;
 
@@ -30,8 +37,12 @@ document.getElementById("hourUnit").firstChild.nodeValue = hourTimeString;
 document.getElementById("minuteUnit").firstChild.nodeValue = minsTimeString;
 document.getElementById("secondUnit").firstChild.nodeValue = secsTimeString;
 
+
+
+
+// ANALOG CLOCK (KNOBS) ////
 //rotation for the seconds
-  handRotation = currentSeconds*6+currentTime.getMilliseconds()/1000*6; //adds 6 degrees to the rotation
+  handRotation = currentSeconds*6+currentTime.getMilliseconds()/999*6; //adds 6 degrees to the rotation
   if (handRotation > 359)
     {
       handRotation = 0;
@@ -60,6 +71,15 @@ document.getElementById("secondUnit").firstChild.nodeValue = secsTimeString;
     }
 
   hoursHand.setAttribute('transform', 'rotate('+handRotation+', 220.52,252.69)');
+
+
+
+
+// SLIDERS ///
+
+
+
+
 
 }
 
