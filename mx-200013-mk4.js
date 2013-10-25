@@ -78,8 +78,9 @@ function updateClock()
 	
 	//console.log(shAttr);
 	//var sh = parseFloat(shAttr);
-	var transformTxt = 'translate(0,'+(1-currentSeconds/59)*shBB.height+')';
-	console.log(transformTxt);
+	var yOffset = (1-currentSeconds/59)*shBB.height-secondSlider.getBBox().height/2;
+	var transformTxt = 'translate(0,'+yOffset+')';
+	//console.log(transformTxt);
 	secondSlider.setAttribute('transform', transformTxt);
 	
 	
