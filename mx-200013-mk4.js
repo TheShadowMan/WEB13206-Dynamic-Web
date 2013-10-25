@@ -1,48 +1,45 @@
 function updateClock()
 {
-
-var currentTime = new Date();
-var currentHours = currentTime.getHours();
-var currentMinutes = currentTime.getMinutes();
-var currentSeconds = currentTime.getSeconds();
-var handRotation = 0; //the degrees the hand is rotated
-var secondsHand = document.getElementById("secondsHand");
-var minutesHand = document.getElementById("minsHand");
-var hoursHand = document.getElementById("hoursHand");
-var secondSlider = document.getElementById("secondSlider");
-var minSlider = document.getElementById("minSlider");
-var hourSlider = document.getElementById("hourSlider");
-
-
-
-
-// DIGITAL CLOCK /////
-// Convert the hours component to 12-hour format if needed
-currentHours = ( currentHours > 12 ) ? currentHours - 12 : currentHours;
-
-//Convert an hours component of "0" to "12"
-currentHours = ( currentHours == 0 ) ? 12 : currentHours;
-
-//Pad the minutes and seconds with leading zeros, if required
-currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
-currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
-
-//Creates a string for the display
-var hourTimeString = currentHours;
-var minsTimeString = currentMinutes;
-var secsTimeString = currentSeconds;
-
-//Update the time display
-document.getElementById("hourUnit").firstChild.nodeValue = hourTimeString;
-document.getElementById("minuteUnit").firstChild.nodeValue = minsTimeString;
-document.getElementById("secondUnit").firstChild.nodeValue = secsTimeString;
-
+	var currentTime = new Date();
+	var currentHours = currentTime.getHours();
+	var currentMinutes = currentTime.getMinutes();
+	var currentSeconds = currentTime.getSeconds();
+	var handRotation = 0; //the degrees the hand is rotated
+	var secondsHand = document.getElementById("secondsHand");
+	var minutesHand = document.getElementById("minsHand");
+	var hoursHand = document.getElementById("hoursHand");
+	var secondSlider = document.getElementById("secondSlider");
+	var minSlider = document.getElementById("minSlider");
+	var hourSlider = document.getElementById("hourSlider");
+	
+	//console.log("start");
+	
+	// DIGITAL CLOCK /////
+	// Convert the hours component to 12-hour format if needed
+	currentHours = ( currentHours > 12 ) ? currentHours - 12 : currentHours;
+	
+	//Convert an hours component of "0" to "12"
+	currentHours = ( currentHours == 0 ) ? 12 : currentHours;
+	
+	//Pad the minutes and seconds with leading zeros, if required
+	currentMinutes = ( currentMinutes < 10 ? "0" : "" ) + currentMinutes;
+	currentSeconds = ( currentSeconds < 10 ? "0" : "" ) + currentSeconds;
+	
+	//Creates a string for the display
+	var hourTimeString = currentHours;
+	var minsTimeString = currentMinutes;
+	var secsTimeString = currentSeconds;
+	
+	//Update the time display
+	document.getElementById("hourUnit").firstChild.nodeValue = hourTimeString;
+	document.getElementById("minuteUnit").firstChild.nodeValue = minsTimeString;
+	document.getElementById("secondUnit").firstChild.nodeValue = secsTimeString;
+	
 
 
-
-// ANALOG CLOCK (KNOBS) ////
-//rotation for the seconds
-  handRotation = currentSeconds*6+currentTime.getMilliseconds()/999*6; //adds 6 degrees to the rotation
+	// ANALOG CLOCK (KNOBS) ////
+	//rotation for the seconds
+	handRotation = currentSeconds*6+currentTime.getMilliseconds()/999*6; //adds 6 degrees to the rotation
   if (handRotation > 359)
     {
       handRotation = 0;
@@ -72,18 +69,28 @@ document.getElementById("secondUnit").firstChild.nodeValue = secsTimeString;
 
   hoursHand.setAttribute('transform', 'rotate('+handRotation+', 220.52,252.69)');
 
+	//console.log("sliders");
 
 
-
-// SLIDERS ///
-
-
-
-
+	// SLIDERS ///
+	//var shAttr = secSliderHeight.getAttribute('height');
+	var shBB = secSliderHeight.getBBox();
+	
+	//console.log(shAttr);
+	//var sh = parseFloat(shAttr);
+	var transformTxt = 'translate(0,'+(1-currentSeconds/59)*shBB.height+')';
+	console.log(transformTxt);
+	secondSlider.setAttribute('transform', transformTxt);
+	
+	
+	
 
 }
 
-setInterval(updateClock, 20);
+window.addEventListener('load', function(){
+	setInterval(updateClock, 20);
+});
+
 
 
 
