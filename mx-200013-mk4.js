@@ -11,6 +11,9 @@ function updateClock()
 	var secondSlider = document.getElementById("secondSlider");
 	var minSlider = document.getElementById("minSlider");
 	var hourSlider = document.getElementById("hourSlider");
+	var crossFader = document.getElementById("crossFader");
+	var amLight = document.getElementById("amLight");
+	var pmLight = document.getElementById("pmLight");
 	
 	//console.log("start");
 	
@@ -45,7 +48,7 @@ function updateClock()
       handRotation = 0;
     }
 
-  secondsHand.setAttribute('transform', 'rotate('+handRotation+', 680.17,249.41)');
+  secondsHand.setAttribute('transform', 'rotate('+handRotation+', 680.17,244.48)');
 
 
 
@@ -56,7 +59,7 @@ function updateClock()
       handRotation = 0;
     }
 
-  minsHand.setAttribute('transform', 'rotate('+handRotation+', 462.46,253.07)');
+  minsHand.setAttribute('transform', 'rotate('+handRotation+', 462.46,248.13)');
 
 
 
@@ -67,29 +70,86 @@ function updateClock()
       handRotation = 0;
     }
 
-  hoursHand.setAttribute('transform', 'rotate('+handRotation+', 220.52,252.69)');
-
-	//console.log("sliders");
+  hoursHand.setAttribute('transform', 'rotate('+handRotation+', 220.52,247.76)');
 
 
 	// SLIDERS ///
+
+	//SECONDS SLIDER CODE
 	//var shAttr = secSliderHeight.getAttribute('height');
 	var shBB = secSliderHeight.getBBox();
 	
-	//console.log(shAttr);
 	//var sh = parseFloat(shAttr);
-	var yOffset = (1-currentSeconds/59)*shBB.height-secondSlider.getBBox().height/2;
+	var yOffset = (1-currentSeconds/60)*shBB.height;//-secondSlider.getBBox().height/2;
 	var transformTxt = 'translate(0,'+yOffset+')';
-	//console.log(transformTxt);
 	secondSlider.setAttribute('transform', transformTxt);
 	
 	
+
+
+	//MINUTES SLIDER CODE
+	//var shAttr = secSliderHeight.getAttribute('height');
+	var mhBB = minSliderHeight.getBBox();
 	
+	//var sh = parseFloat(shAttr);
+	var yOffset = (1-currentMinutes/60)*mhBB.height;
+	var transformTxt = 'translate(0,'+yOffset+')';
+	minSlider.setAttribute('transform', transformTxt);
+	
+
+
+
+	//HOURS SLIDER CODE
+	//var shAttr = secSliderHeight.getAttribute('height');
+	var hhBB = hourSliderHeight.getBBox();
+	
+	//var sh = parseFloat(shAttr);
+	var yOffset = (1-currentHours/12)*hhBB.height;
+	var transformTxt = 'translate(0,'+yOffset+')';
+	hourSlider.setAttribute('transform', transformTxt);
+
+
+
+	//AM - PM SLIDER CODE
+	var cbhBB = crossBarWidth.getBBox();
+	var xOffset = (currentTime.getHours()/24)*cbhBB.width;
+
+	if (currentTime.getHours() <= 12)// && currentTime.getHours() > 0) 
+	{
+	   xOffset = (currentHours/12)*cbhBB.width;
+	}
+	else
+	{
+	   var rch = 24-currentTime.getHours();
+	   xOffset = (rch/12)*cbhBB.width;
+	}
+
+	if (currentTime.getHours() == 0) 
+		{
+			var bch = currentTime.getHours();
+			xOffset = (bch/12)*cbhBB.width;
+		}
+
+	var transformTxt = 'translate('+xOffset+',0)';
+	crossFader.setAttribute('transform', transformTxt);
+
+
+	if (currentTime.getHours() >= 12) 
+		{
+			pmLight.style.opacity = 1;
+			amLight.style.opacity = 0.2;
+		}
+	else
+		{
+			pmLight.style.opacity = 0.2;
+			amLight.style.opacity = 1;
+		}
+
 
 }
 
 window.addEventListener('load', function(){
-	setInterval(updateClock, 20);
+	setInterval(updateClock, 10);
 });
 
 
