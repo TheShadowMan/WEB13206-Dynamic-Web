@@ -64,7 +64,7 @@ function updateClock()
 
 
 //rotation for the hours
-  handRotation = currentHours*30+currentTime.getMinutes()/59*6; //adds 6 degrees to the rotation
+  handRotation = currentHours*30+currentTime.getMinutes()/2.5; //adds 6 degrees to the rotation (dividing by 2.5 makes the hand constantly update instead of just on the hour)
   if (handRotation > 359)
     {
       handRotation = 0;
@@ -80,7 +80,7 @@ function updateClock()
 	var shBB = secSliderHeight.getBBox();
 	
 	//var sh = parseFloat(shAttr);
-	var yOffset = (1-currentSeconds/60)*shBB.height;//-secondSlider.getBBox().height/2;
+	var yOffset = (1-currentSeconds/60-currentTime.getMilliseconds()/60000)*shBB.height;//-secondSlider.getBBox().height/2;
 	var transformTxt = 'translate(0,'+yOffset+')';
 	secondSlider.setAttribute('transform', transformTxt);
 	
@@ -104,7 +104,7 @@ function updateClock()
 	var hhBB = hourSliderHeight.getBBox();
 	
 	//var sh = parseFloat(shAttr);
-	var yOffset = (1-currentHours/12)*hhBB.height;
+	var yOffset = (1-currentHours/12-currentMinutes/60/12)*hhBB.height;
 	var transformTxt = 'translate(0,'+yOffset+')';
 	hourSlider.setAttribute('transform', transformTxt);
 
