@@ -1,0 +1,16 @@
+<template name="player">
+	<div id="player" class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>PLAYER</h1>
+				<ul class="rated">
+          {{#each answers}}
+            <li>{{answer}} ({{count}})</li>
+          {{/each}}
+				</ul>
+				<h3>Think you know what the question is?</h3>
+				<h3 class="shake">Buzz in now!</h3>
+			</div>
+		</div>
+	</div>
+</template>
